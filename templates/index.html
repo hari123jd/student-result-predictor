@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Result Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 30px;
+        }
+        .container {
+            max-width: 450px;
+            margin: 30px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #0001;
+        }
+        h1 { color: #1d4ed8; }
+        label { display: block; margin-top: 15px; }
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            margin-top: 6px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 12px;
+            background: #dcfce7;
+            font-weight: bold;
+        }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Student Result Predictor</h1>
+    <p>Enter student details to predict the result.</p>
+
+    <form method="POST">
+        <label>Study Hours</label>
+        <input type="number" name="study_hours"
+               min="0" max="24" step="0.1" required>
+
+        <label>Attendance (%)</label>
+        <input type="number" name="attendance"
+               min="0" max="100" step="0.1" required>
+
+        <label>Internal Marks (%)</label>
+        <input type="number" name="internal_marks"
+               min="0" max="100" step="0.1" required>
+
+        <button type="submit">Predict Result</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+        Predicted Result: {{ prediction }}
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <p>Model Version: {{ version }}</p>
+</div>
+</body>
+</html>
